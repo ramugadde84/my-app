@@ -1,0 +1,32 @@
+<app-tab></app-tab>
+<div class="jumbotron">
+<table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
+  <thead>
+  <tr>
+      <th style="width: 30%">
+          <mfDefaultSorter by="id">UserID</mfDefaultSorter>
+      </th>
+      <th style="width: 30%">
+          <mfDefaultSorter by="username">Username</mfDefaultSorter>
+      </th>
+    
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of mf.data">
+      <td>{{user.id}}</td>
+      <td>{{user.username}}</td>
+     
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+      <td colspan="4">
+          <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+      </td>
+  </tr>
+  </tfoot>
+</table>
+</div>
+
+<app-footer></app-footer>
