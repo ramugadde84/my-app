@@ -39,6 +39,7 @@ module.exports = {
     runtimeChunk: true
   },
   devServer: {
+   port: 4000,
    proxy: [{
      context: ['/api/*'],
      target: "http://localhost:9010"
