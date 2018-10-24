@@ -17,20 +17,19 @@ export class UserinfoComponent implements OnInit {
   error = "";
 
   
- 
-  
-  @Input() public alerts: Array<string> = [];
-
-  constructor(private formBuilder: FormBuilder,private router:Router,
+constructor(private router:Router,
     private userInfoService: UserInfoService,private alertConfig: NgbAlertConfig) { 
       
     }
 
   ngOnInit() {
-    this.userInfoForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      userId: new FormControl('')
-    })
+    this.userInfoForm = new FormGroup({
+       id: new FormControl({
+         value: '',disabled: true
+       },Validators.required),
+
+       username: new FormControl('',Validators.required)
+    });
   }
     
     get f(){
@@ -53,8 +52,15 @@ export class UserinfoComponent implements OnInit {
                             .subscribe(
                             data => {
                               this.loading=false;
-                              console.log(data.id);
-                              userId: new FormControl(data.id);        
+                              
+                              this.userInfoForm = new FormGroup({
+                                id: new FormControl({
+                                  value: data.id,disabled: true
+                                },Validators.required),
+                         
+                                username: new FormControl(data.username,Validators.required)
+                             })
+                                 
                               this.alertConfig.type = 'success';
                               this.alertConfig.dismissible = true;
                                console.log(data);
