@@ -40,9 +40,12 @@ module.exports = {
   },
   devServer: {
    port: 4000,
-   proxy: [{
-     context: ['/api/*'],
-     target: "http://localhost:9010"
-   }]
+   proxy: {
+    '/api/*': {
+      port:9010,
+      target: 'http://localhost:9010',
+      secure: false
+    }
+}}
   }
-};
+  
